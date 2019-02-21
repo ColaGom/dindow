@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
+import 'api.dart';
+import 'package:flutter/foundation.dart';
 
 void main() => runApp(DindowApp());
 
@@ -101,8 +103,18 @@ class _DustScreenState extends State<DustScreen> {
   }
 
   void updatePosition(Position position){
+    var lat = position.latitude;
+    var lng = position.longitude;
+
+    debugPrint("hi");
+    API.getNearCityData(lat, lng).then((result) {
+      setState(() {
+
+      });
+    });
+
     setState(() {
-      _positionInfo = (position == null) ? "null" : "lat : ${position.latitude}";
+      _positionInfo = (position == null) ? "null" : "lat : ${lat} lng : ${lng}";
     });
   }
 }
